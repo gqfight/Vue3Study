@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 使用v-if实现点击按钮切换p标签中内容是否显示 -->
+            <p v-if="isShow">我是内容</p>
+            <button @click="changeShow">改变</button>
+            <br>
+            <!-- 使用v-if三个条件，根据分数的不同，显示不同的层次，优秀，及格，不及格 -->
+            <input type="text" v-model="grade">
+            <p v-if="grade>=90">优秀</p>
+            <p v-else-if="grade>=60">及格</p>
+            <p v-else>不及格</p>
+            <!-- 使用template模板实现三个hhh的显示 -->
+            
+            <!-- 
+                v-if和v-show的区别：
+                    v-if是决定是否渲染，v-show是决定是否显示
+             -->
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                isShow:true,
+                grade:100
+            }
+        },
+        // 需要使用的方法
+        methods:{
+            changeShow(){
+                this.isShow = !this.isShow
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

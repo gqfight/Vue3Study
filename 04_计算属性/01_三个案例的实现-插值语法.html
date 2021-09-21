@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 
+                1:模板中存在大量的复杂逻辑，不便于维护
+                2:当有多次一样的逻辑时，存在重复的代码
+                3：多次使用的时候，很多运算也需要多次执行，没有缓存
+             -->
+
+            <!-- 01显示firstname和lastname拼接的结果 -->
+            <p>{{firstName}}-{{lastName}}</p>
+            <!-- 02根据分数判断是否及格 -->
+            <p>{{score>=60?"及格":"不及格"}}</p>
+            <!-- 03对hello world进行反转 -->
+            <p>{{message.split(" ").reverse().join(" ")}}</p>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                firstName:"jack",
+                lastName:"chen",
+                score:80,
+                message:"Hello World"
+            }
+        },
+        // 需要使用的方法
+        methods:{
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

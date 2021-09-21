@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <table border="1"> 
+                <tr>
+                    <th></th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(item,index) in bookInfo" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.price}}</td>
+                    <td>
+                        <button :disabled="item.count<=1" @click="decrement(index)">-</button>
+                        {{item.count}}
+                        <button @click="increment(index)">+</button>
+                    </td>
+                    <td><button @click="remove(index)">移除</button></td>
+                </tr>
+            </table>
+            <p>总价格为:{{allprice}}</p>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

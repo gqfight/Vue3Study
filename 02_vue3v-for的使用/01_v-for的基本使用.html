@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 使用v-for展示数组--电影的名字前面加上索引值 -->
+            <ul>
+                <li v-for="(value,index) in info">{{index+1}}--{{value}}</li>
+            </ul>
+            <!-- 使用v-for展示对象--个人信息 -->
+            <ul>
+                <li v-for="(value,key,index) in  obj">{{index}}--{{key}}:{{value}}</li>
+            </ul>
+            <!-- 使用v-for遍历展示数字 -->
+            <ul>
+                <li v-for="val in 10">{{val}}</li>
+            </ul>
+            <!-- v-for和template的配合使用 -->
+            <ul>
+                <template v-for="(value,key) in obj">
+                    <li>{{key}}</li>
+                    <li>{{value}}</li>
+                    <hr>
+                </template>
+            </ul>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                info:[
+                    "家有儿女",
+                    "盗梦空间",
+                    "赌神",
+                    "龙王传说"
+                ],
+                obj:{
+                    name:"hhh",
+                    age:18,
+                    height:160
+                }
+            }
+        },
+        // 需要使用的方法
+        methods:{
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

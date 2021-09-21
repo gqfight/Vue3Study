@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        使用v-bind绑定class:
+            1:对象语法
+            2:数组语法
+    -->
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+        
+    <template id="why">
+        <div>
+            <!--普通方式绑定class-->
+            <div :class="className">哈哈哈1</div>
+            <!--
+                对象方式绑定class
+                动态切换class是否加入，为true时加入，为false时不加入
+            -->
+            <div class="why" :class="{nba:true,james:true}"></div>
+            <!-- 案例练习 -->
+            <div :class={active:isActive}>我可以改变</div>
+            <button @click="change">改变</button>
+            <!-- 绑定对象 -->
+            <div :class="classObj"></div>
+            <!-- 从函数中获取 -->
+            <div :class="getClassObj()"></div>
+
+            <!--
+                总结：绑定class时，有以下三种绑定方式
+                    1：直接绑定变量
+                    2：通过对象绑定多个class,通过控制true or false来控制是否展现
+                        可以直接写对象，也可以使用函数返回对象
+            -->
+
+            <hr>
+            <!-- 数组绑定语法:可以把一个数组传递给:class -->
+            <div :class="['A','B']"></div>
+            <!-- 可以通过三元运算符计算得出结果 -->
+            <div :class="['A','B',isActive?'C':'']"></div>
+            <!-- 也可以在数组中使用对象 -->
+            <div :class="[{A:true,D:false}]"></div>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                className:"active",
+                isActive:true,
+                classObj:{
+                    A:true,
+                    B:false,
+                    C:true
+                }
+            }
+        },
+        // 需要使用的方法
+        methods:{
+            change(){
+                this.isActive = !this.isActive
+            },
+            getClassObj(){
+                return {
+                    A:true,
+                    B:false,
+                    C:true
+                }
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

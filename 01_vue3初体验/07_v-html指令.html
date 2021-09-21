@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 本来会被当做文本解析，加上v-html后，会将v-html对应的内容当作html格式进行解析渲染 -->
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div v-html="info">
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                info:"<h1>哈哈哈</h1>"
+            }
+        },
+        // 需要使用的方法
+        methods:{
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

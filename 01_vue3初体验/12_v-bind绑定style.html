@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 我们可以使用v-bind绑定style来动态决定一些样式-->
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 传入字符串表明写死，传入变量表明可以根据变量的改变而改变 -->
+            <p :style="{color:myColor,fontSize:'30px'}">111</p>
+            <!-- 传入一个对象,vue可以帮助我们把对象里面的样式解析出来 -->
+            <p :style="myStyleObj">222</p>
+            <!-- 传入数组的本质其实和对象是一样的 -->
+            <p :style="[myStyleObj]">333</p>
+            <button @click="changeColor">改变颜色</button>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                myColor:"red",
+                myStyleObj:{
+                    color:"blue",
+                    fontSize:"100px",
+                    backgroundColor:"green"
+                }
+            }
+        },
+        // 需要使用的方法
+        methods:{
+            changeColor(){
+                this.myColor = "green"
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

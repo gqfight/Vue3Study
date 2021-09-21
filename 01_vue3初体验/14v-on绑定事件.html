@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        stop - 调用 event.stopPropagation()。
+            所谓冒泡就是底层的元素如果触发了对应事件，事件会向上进行传递,如果上层绑定了对应事件，那么就会被触发
+            所以捕获就是从上到下
+        prevent - 调用 event.preventDefault()。
+            阻止元素发生的默认行为
+        capture - 添加事件侦听器时使用 capture 模式。
+            给元素添加一个监听器，当元素发生冒泡时，先触发带有该修饰符的元素，若有多个
+            修饰符，则由内而外触发，就是谁有该事件修饰符，就先触发谁
+        self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+        {keyAlias} - 仅当事件是从特定键触发时才触发回调。
+        once - 只触发一次回调。
+        left - 只当点击鼠标左键时触发。
+        right - 只当点击鼠标右键时触发。
+        middle - 只当点击鼠标中键时触发。
+        passive - { passive: true } 模式添加侦听器
+     -->
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- v-on可以简写为@ -->
+            <div @click="clicked" style="width: 100px;height: 100px;background-color: red;"></div>
+            <!-- 想一次性绑定多个事件，可以传入一个对象，键是对应函数名，值是对应函数 -->
+            <div @="{click:clicked,mousemove:moved}" style="width: 100px;height: 100px;background-color: red;"></div>
+
+            <!-- 
+                如果不传递参数，那么event会默认被传入，如果传递了至少一个参数，那么event就需要传入$event显示指定
+            -->
+            <div @click="clicked($event,a)" style="width: 100px;height: 100px;background-color: red;"></div>
+            <div @click="val++">
+                <button @click.stop="">点击{{val}}</button>
+            </div>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                val:10
+            }
+        },
+        // 需要使用的方法
+        methods:{
+            clicked(event){
+                console.log("被点击了")
+                console.log(event)
+            },
+            moved(){
+                console.log("移动了")
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

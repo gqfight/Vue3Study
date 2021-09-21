@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 使用侦听器侦听info信息的变化 -->
+            <button @click="changeInfo">改变表层</button>
+            <!-- 默认使用侦听器侦听一个属性是侦听不到，必须添加属性deep为true -->
+            <button @click="changeInfoName">改变info中name</button>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                info:{name:"hhh",age:18,nba:{name:'kobe'}}
+            }
+        },
+        // 需要使用的方法
+        methods:{
+            changeInfo(){
+                this.info = {name:"heheh"}
+            },
+            changeInfoName(){
+                this.info.name = "hehehe"
+            }
+        },
+        watch:{
+            info:{
+                handler:function(newInfo,oldInfo){
+                    console.log(newInfo,oldInfo)
+                },
+                deep:true,
+                // 表明渲染时会执行一次，不然只有更改时会执行
+                immediate:true
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

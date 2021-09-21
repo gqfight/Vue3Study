@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+        <!-- html自带的template，默认不会被浏览器渲染，用来给js读取 -->
+    <template id="why">
+        <div>
+            <!-- 
+                计算属性与method的区别
+                    计算属性是有缓存的，也就是说它只有在第一次或者更新时会进行计算，其它时候都是去缓存中的内容
+                    method每调用一次就会执行一次该函数
+             -->
+            <p>{{fullName}}</p>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    Vue.createApp({
+        // 要传入的模板字符串
+        template:"#why",
+        // 要保存并操作的数据
+        data:()=>{
+            return {
+                firstName:"jack",
+                lastName:"chen",
+                score:80,
+                message:"Hello World"
+            }
+        },
+        // 需要使用的方法
+        methods:{
+        },
+        computed:{
+            fullName(){
+                return this.firstName+" "+this.lastName
+            }
+        }
+    }).mount("#app")
+    </script>
+</body>
+</html>

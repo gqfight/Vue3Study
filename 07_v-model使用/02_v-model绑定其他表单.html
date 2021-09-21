@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <template id="why">
+        <div>
+            <!-- 1绑定textarea -->
+            <label for="intro">
+                自我介绍
+                <textarea name="intro" id="intro" cols="30" rows="10" v-model="intro"></textarea>
+                {{intro}}
+            </label>
+            <br>
+            <!-- 2绑定checkbox -->
+            <!-- 2.1单选框 -->
+            <label for="agree">
+                <input id="radio" type="checkbox" v-model="agree">同意协议 
+                {{agree}}
+                <br>
+            </label>
+            <!-- 2.2多选框 -->
+            <!-- 多选框的value需要自己指定一个，不然v-model无法识别 -->
+            <label for="basketball">
+                篮球<input type="checkbox" name="basketball" id="basketball" v-model="hobbies" value="basketball">
+            </label>
+            <label for="football">
+                足球<input type="checkbox" name="football" id="football" v-model="hobbies" value="football">
+                {{hobbies}}
+            </label>
+            <!-- 3:radio -->
+            <span>你的性别</span>
+            <label for="male">
+                男<input type="radio" name="male" value="male" id="male" v-model="gender">
+            </label>
+            <label for="female">
+                女<input type="radio" name="female" value="female" id="female" v-model="gender">
+            </label>
+            {{gender}}
+            <br>
+            <!-- 4:select -->
+            <select v-model="fruit">
+                <option value="apple">苹果</option>
+                <option value="orange">橘子</option>
+                <option value="banana">香蕉</option>
+            </select>
+            {{fruit}}
+        </div>
+    </template>
+    <div id="app"></div>
+    <script>
+        Vue.createApp({
+            template:"#why",
+            data:()=>{
+                return {
+                    intro:"123",
+                    agree:false,
+                    hobbies:["basketball"],
+                    gender:"male",
+                    fruit:"apple"
+                }
+            },
+            methods:{
+                
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>
